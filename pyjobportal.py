@@ -31,7 +31,6 @@ class JobPortalWebSpider(object):
 
     def __init__(self, **kwargs):
         ''' Common settings to all APIs '''
-        self.username = kwargs['username']
         self.api_url = kwargs['api_url']
         self.days_back = kwargs['days_back']
         self.days_offset = kwargs['days_offset']
@@ -144,8 +143,9 @@ class InfojobsJobOffer(JobOffer):
 class Infojobs(JobPortalWebSpider):
 
     def __init__(self, **kwargs):
-        ''' Infojobs API requires a password too '''
-        self.password = kwargs['password']
+        ''' Infojobs API requires client_id and client_secret '''
+        self.client_id = kwargs['client_id']
+        self.client_secret = kwargs['client_secret']
         JobPortalWebSpider.__init__(self, **kwargs)
 
     def _format_payload(self, payload):
@@ -160,9 +160,8 @@ class Infojobs(JobPortalWebSpider):
         return payload
 
     def _http_request_job_offer(self):
-        return self.session.get(self.api_url, auth=(self.username,
-                                                             self.password),
-                                         params = self.payload)
+        return self.session.get(self.api_url, auth=(self.client_id,
+               self.client_secret), params = self.payload)
 
     def _get_job_offer_list(self):
         return [InfojobsJobOffer(offer, self.date_format, self.api_date_format)
@@ -180,3 +179,6 @@ class Infojobs(JobPortalWebSpider):
         else:
             return str(datetime.strptime(date_in, in_format).strftime(
                       out_format))[:-7] + 'Z'
+
+class Linkedin(JobPortalWebSpider):
+    pass

@@ -20,24 +20,20 @@ from datetime import datetime
 
 host = 'https://api.infojobs.net'
 api_url = host + '/api/1/offer'
-username = 'yourClientID'
-password = 'yourClientsecret'
+client_id = 'your_linkedin_api_key_b64_encoded'
+client_secret = 'your_linkedin_secret_b64_encoded'
 payload = {
-	   'province': 'barcelona',
+           'province': 'barcelona',
            'category': 'informatica-telecomunicaciones',
            'maxResults': 1000,
-	}
+        }
 report_title = 'Infojobs job offers'
 report_footer = '<br>Report generated using pyjobportal<br>'
-# Job offer format
-# 2013-11-02T20:50:55.000+0000
-# Job offer publishedMin and publishedMax format
-# 2013-11-01T00:00:00Z
 date_format = '%d/%m/%Y'
 api_date_format = '%Y-%m-%dT%H:%M:%S.%f'
 weekday = datetime.today().weekday()
 if weekday == 0:
-    days_back = 3 
+    days_back = 3
 else:
     days_back = 1
 days_offset = 1
