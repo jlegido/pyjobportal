@@ -1,0 +1,15 @@
+Python integration with job portal Infojobs.
+
+An example is provided in "examples" directory.
+
+Adjuts "examples/settings.py" accordingly.
+
+Please bear in mind that "client_id" and "client_secret" variables are B64encoded:
+
+ipython
+In [1]: import base64
+
+In [2]: base64.b64encode('your_linkedin_api_client_id')
+Out[2]: 'eW91cl9saW5rZWRpbl9hcGlfY2xpZW50X2lk'
+
+If everything went as expected, a "infojobs.html" file should be created.
